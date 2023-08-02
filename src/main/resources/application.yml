@@ -1,0 +1,19 @@
+openai:
+  key: ${OPEN_AI_KEY}
+  url: https://api.openai.com/v1/chat/completions
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  #    hibernate:
+  #      ddl-auto: create
