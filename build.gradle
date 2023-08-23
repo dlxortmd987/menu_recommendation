@@ -34,6 +34,8 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
+    implementation 'com.opencsv:opencsv:5.7.1'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
