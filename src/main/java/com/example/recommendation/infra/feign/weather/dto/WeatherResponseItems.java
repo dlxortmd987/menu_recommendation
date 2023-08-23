@@ -6,11 +6,9 @@ public record WeatherResponseItems(
 	List<Item> item
 ) {
 	public record Item(
-		int numOfRows,
-		int pageNo,
-		int totalCount,
 		String category,
-		double obsrValue
+		String fcstTime,
+		String fcstValue
 	) {
 	}
 }

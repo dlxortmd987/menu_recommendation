@@ -9,9 +9,9 @@ import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveRespons
 @FeignClient(name = "Weather", url = "${weather.url}")
 public interface WeatherClient {
 
-	@GetMapping("/getUltraSrtNcst")
+	@GetMapping("/getUltraSrtFcst")
 	WeatherCallLiveResponse callLive(
-		@RequestParam(value = "ServiceKey") String serviceKey,
+		@RequestParam(value = "serviceKey") String serviceKey,
 		@RequestParam(value = "numOfRows") int numOfRows,
 		@RequestParam(value = "pageNo") int pageNo,
 		@RequestParam(value = "dataType") String dataType,
