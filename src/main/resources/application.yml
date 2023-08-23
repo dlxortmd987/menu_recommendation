@@ -1,6 +1,6 @@
 openai:
   key: ${OPEN_AI_KEY}
-  url: https://api.openai.com/v1/chat/completions
+  chat-url: https://api.openai.com
 
 spring:
   datasource:
@@ -17,3 +17,7 @@ spring:
         format_sql: true
   #    hibernate:
   #      ddl-auto: create
+
+logging:
+  level:
+    com.example.recommendation.infra.feign: DEBUG
