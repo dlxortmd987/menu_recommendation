@@ -2,6 +2,11 @@ openai:
   key: ${OPEN_AI_KEY}
   chat-url: https://api.openai.com
 
+weather:
+  key: ${WEATHER_KEY}
+  url: http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0
+  data_type: JSON
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
