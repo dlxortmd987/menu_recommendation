@@ -1,21 +1,22 @@
 package com.example.recommendation.domain.weather.model;
 
-import java.util.Objects;
-
 public enum TemperatureStatus {
 
-	COLD("추운"),
-	COOL("시원한"),
-	WARM("따뜻한"),
-	HOT("더운");
+	COLD,
+	COOL,
+	WARM,
+	HOT;
 
-	String korean;
-
-	TemperatureStatus(String korean) {
-		this.korean = Objects.requireNonNull(korean);
-	}
-
-	public String getKorean() {
-		return korean;
+	public static TemperatureStatus from(String value) {
+		Double temperature = Double.parseDouble(value);
+		if (temperature.compareTo(5.0) < 0) {
+			return COLD;
+		} else if (temperature.compareTo(12.0) < 0) {
+			return COOL;
+		} else if (temperature.compareTo(23.0) < 0) {
+			return WARM;
+		} else {
+			return HOT;
+		}
 	}
 }

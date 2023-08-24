@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.example.recommendation.infra.feign.weather.dto.WeatherGrid;
+import com.example.recommendation.infra.feign.weather.utils.WeatherGridConvertor;
 
 class WeatherWeatherGridConvertorTest {
 

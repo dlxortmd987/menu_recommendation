@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
+import com.example.recommendation.infra.feign.weather.utils.WeatherProperties;
 
 @SpringBootTest
 class WeatherClientTest {
@@ -25,9 +26,9 @@ class WeatherClientTest {
 		WeatherCallLiveResponse weatherCallLiveResponse = weatherClient.callLive(
 			1000,
 			1,
-			"20230823",
-			"2000",
-			55,
+			"20230824",
+			"0130",
+			60,
 			127,
 			weatherProperties
 		);

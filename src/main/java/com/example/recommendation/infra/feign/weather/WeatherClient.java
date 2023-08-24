@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
+import com.example.recommendation.infra.feign.weather.utils.WeatherProperties;
 
 @FeignClient(name = "Weather", url = "${weather.url}")
 public interface WeatherClient {

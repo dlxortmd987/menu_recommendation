@@ -1,4 +1,4 @@
-package com.example.recommendation.infra.feign.weather;
+package com.example.recommendation.infra.feign.weather.utils;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

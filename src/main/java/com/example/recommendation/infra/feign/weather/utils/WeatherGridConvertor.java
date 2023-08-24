@@ -1,4 +1,4 @@
-package com.example.recommendation.infra.feign.weather;
+package com.example.recommendation.infra.feign.weather.utils;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import com.example.recommendation.infra.feign.weather.dto.WeatherGrid;
 
 public class WeatherGridConvertor {
 
-	private static final int LATITUDE_INDEX = 14;
-	private static final int LONGITUDE_INDEX = 13;
+	private static final int LATITUDE_INDEX = 13;
+	private static final int LONGITUDE_INDEX = 14;
 
 	private static final int X_INDEX = 5;
 	private static final int Y_INDEX = 6;
