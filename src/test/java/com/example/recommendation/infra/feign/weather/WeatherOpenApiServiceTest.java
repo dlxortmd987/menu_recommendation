@@ -67,6 +67,5 @@ class WeatherOpenApiServiceTest {
 			any(WeatherProperties.class)
 		);
 		assertThat(actual).isEqualTo(expect);
-
 	}
 }
