@@ -15,8 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.recommendation.domain.menu.model.TimeSlot;
 import com.example.recommendation.domain.menu.model.dto.MenuRequest;
-import com.example.recommendation.domain.menu.service.dto.MenuDetail;
-import com.example.recommendation.domain.menu.service.dto.MenuResponse;
+import com.example.recommendation.domain.recommend.dto.MenuDetail;
+import com.example.recommendation.domain.recommend.dto.MenuResponse;
 import com.example.recommendation.domain.weather.model.SkyStatus;
 import com.example.recommendation.domain.weather.model.TemperatureStatus;
 import com.example.recommendation.domain.weather.model.Weather;
@@ -32,10 +32,9 @@ class OpenAiMenuRecommendServiceTest {
 	@Mock
 	private OpenAiChatClient openAiChatClient;
 
+	private final ObjectMapper objectMapper = new ObjectMapper();
 	@InjectMocks
-	private OpenAiMenuRecommendService recommendService;
-
-	private ObjectMapper objectMapper = new ObjectMapper();
+	private OpenAiMenuMenuRecommendService recommendService;
 
 	@Test
 	void recommend() throws JsonProcessingException {

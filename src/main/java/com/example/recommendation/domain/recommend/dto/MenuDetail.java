@@ -1,4 +1,4 @@
-package com.example.recommendation.domain.menu.service.dto;
+package com.example.recommendation.domain.recommend.dto;
 
 public record MenuDetail(
 	String menu,

@@ -13,4 +13,5 @@ public record NaverSearchResponse(
 	List<NaverSearchItem> items
 ) {
 	private static final String DESERIALIZE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss Z";
+
 }

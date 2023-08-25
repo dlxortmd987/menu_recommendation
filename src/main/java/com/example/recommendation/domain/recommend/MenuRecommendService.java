@@ -1,7 +1,7 @@
-package com.example.recommendation.domain.menu.service;
+package com.example.recommendation.domain.recommend;
 
 import com.example.recommendation.domain.menu.model.dto.MenuRequest;
-import com.example.recommendation.domain.menu.service.dto.MenuResponse;
+import com.example.recommendation.domain.recommend.dto.MenuResponse;
 
 public interface MenuRecommendService {
 
