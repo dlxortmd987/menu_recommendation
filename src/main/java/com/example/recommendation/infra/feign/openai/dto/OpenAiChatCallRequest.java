@@ -2,7 +2,7 @@ package com.example.recommendation.infra.feign.openai.dto;
 
 import java.util.List;
 
-import com.example.recommendation.domain.weather.menu.model.dto.MenuRequest;
+import com.example.recommendation.domain.menu.model.dto.MenuRequest;
 
 public record OpenAiChatCallRequest(
 	String model,

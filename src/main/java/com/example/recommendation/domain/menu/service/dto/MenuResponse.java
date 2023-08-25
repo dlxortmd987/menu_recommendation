@@ -1,8 +1,8 @@
-package com.example.recommendation.domain.weather.menu.service.dto;
+package com.example.recommendation.domain.menu.service.dto;
 
 import java.util.List;
 
-import com.example.recommendation.domain.weather.menu.model.TimeSlot;
+import com.example.recommendation.domain.menu.model.TimeSlot;
 import com.example.recommendation.domain.weather.model.Weather;
 
 public record MenuResponse(

@@ -13,10 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.example.recommendation.domain.weather.menu.model.TimeSlot;
-import com.example.recommendation.domain.weather.menu.model.dto.MenuRequest;
-import com.example.recommendation.domain.weather.menu.service.dto.MenuDetail;
-import com.example.recommendation.domain.weather.menu.service.dto.MenuResponse;
+import com.example.recommendation.domain.menu.model.TimeSlot;
+import com.example.recommendation.domain.menu.model.dto.MenuRequest;
+import com.example.recommendation.domain.menu.service.dto.MenuDetail;
+import com.example.recommendation.domain.menu.service.dto.MenuResponse;
 import com.example.recommendation.domain.weather.model.SkyStatus;
 import com.example.recommendation.domain.weather.model.TemperatureStatus;
 import com.example.recommendation.domain.weather.model.Weather;
