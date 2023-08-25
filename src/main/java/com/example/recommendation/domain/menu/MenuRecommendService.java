@@ -1,4 +1,4 @@
-package com.example.recommendation.domain.menu.model;
+package com.example.recommendation.domain.menu;
 
 import com.example.recommendation.domain.menu.model.dto.MenuRequest;
 import com.example.recommendation.domain.menu.model.dto.MenuResponse;
