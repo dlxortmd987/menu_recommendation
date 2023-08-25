@@ -13,7 +13,7 @@ class WeatherWeatherGridConvertorTest {
 	void get() {
 		WeatherGrid expect = new WeatherGrid(60, 127);
 
-		WeatherGrid actual = WeatherGridConvertor.get(37.563569, 126.980008);
+		WeatherGrid actual = WeatherGridConvertor.get(126.970955, 37.573269);
 
 		assertThat(actual)
 			.isEqualTo(expect);
