@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.recommendation.domain.menu.model.MenuRecommendService;
+import com.example.recommendation.domain.menu.model.dto.MenuDetail;
 import com.example.recommendation.domain.menu.model.dto.MenuRequest;
-import com.example.recommendation.domain.recommend.MenuRecommendService;
-import com.example.recommendation.domain.recommend.dto.MenuDetail;
-import com.example.recommendation.domain.recommend.dto.MenuResponse;
+import com.example.recommendation.domain.menu.model.dto.MenuResponse;
 import com.example.recommendation.domain.weather.model.Weather;
 import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallRequest;
 import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallResponse;
