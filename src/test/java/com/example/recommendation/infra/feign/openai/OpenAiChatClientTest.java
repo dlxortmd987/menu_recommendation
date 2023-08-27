@@ -1,5 +1,8 @@
 package com.example.recommendation.infra.feign.openai;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,18 +25,27 @@ class OpenAiChatClientTest {
 	@Disabled
 	@DisplayName("OpenAi api를 호출할 수 있다.")
 	@Test
-	void call() {
-		long before = System.currentTimeMillis();
-		MenuRequest request = new MenuRequest(
-			TemperatureStatus.COLD,
-			SkyStatus.RAINY,
-			TimeSlot.AFTERNOON
-		);
+	void call() throws InterruptedException {
+		ExecutorService executorService = Executors.newFixedThreadPool(32);
 
-		OpenAiChatCallResponse response = openAiChatClient.call(OpenAiChatCallRequest.from(request));
-		long after = System.currentTimeMillis();
-		System.out.println("실행 시간(ms): " + (after - before));
+		for (int i = 0; i < 3; i++) {
+			executorService.submit(() -> {
+				long before = System.currentTimeMillis();
+				MenuRequest request = new MenuRequest(
+					TemperatureStatus.COLD,
+					SkyStatus.RAINY,
+					TimeSlot.AFTERNOON
+				);
 
-		System.out.println(response.choices().get(0).message().content());
+				OpenAiChatCallResponse response = openAiChatClient.call(OpenAiChatCallRequest.from(request));
+				long after = System.currentTimeMillis();
+				System.out.println("실행 시간(ms): " + (after - before));
+
+				System.out.println(response.choices().get(0).message().content());
+			});
+		}
+
+		Thread.sleep(10000);
+
 	}
 }
