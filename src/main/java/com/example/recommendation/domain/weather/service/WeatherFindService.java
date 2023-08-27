@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.example.recommendation.domain.weather.model.dto.WeatherResponse;
 
-public interface WeatherService {
+public interface WeatherFindService {
 
 	List<WeatherResponse> get(Double latitude, Double longitude, LocalDateTime targetTime);
 }

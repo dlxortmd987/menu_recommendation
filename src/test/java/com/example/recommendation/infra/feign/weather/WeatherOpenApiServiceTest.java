@@ -29,7 +29,7 @@ class WeatherOpenApiServiceTest {
 	private WeatherProperties weatherProperties;
 
 	@InjectMocks
-	private WeatherOpenApiService weatherOpenApiService;
+	private OpenApiWeatherFindService weatherOpenApiService;
 
 	@BeforeEach
 	void beforeAll() {

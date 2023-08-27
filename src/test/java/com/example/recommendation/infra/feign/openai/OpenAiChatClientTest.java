@@ -23,6 +23,7 @@ class OpenAiChatClientTest {
 	@DisplayName("OpenAi api를 호출할 수 있다.")
 	@Test
 	void call() {
+		long before = System.currentTimeMillis();
 		MenuRequest request = new MenuRequest(
 			TemperatureStatus.COLD,
 			SkyStatus.RAINY,
@@ -30,6 +31,8 @@ class OpenAiChatClientTest {
 		);
 
 		OpenAiChatCallResponse response = openAiChatClient.call(OpenAiChatCallRequest.from(request));
+		long after = System.currentTimeMillis();
+		System.out.println("실행 시간(ms): " + (after - before));
 
 		System.out.println(response.choices().get(0).message().content());
 	}

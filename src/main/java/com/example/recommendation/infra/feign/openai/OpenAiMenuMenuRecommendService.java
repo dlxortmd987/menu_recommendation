@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.recommendation.domain.menu.model.MenuRecommendService;
+import com.example.recommendation.domain.menu.MenuRecommendService;
 import com.example.recommendation.domain.menu.model.dto.MenuDetail;
 import com.example.recommendation.domain.menu.model.dto.MenuRequest;
 import com.example.recommendation.domain.menu.model.dto.MenuResponse;
