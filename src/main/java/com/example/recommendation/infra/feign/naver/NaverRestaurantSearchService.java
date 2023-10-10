@@ -41,6 +41,6 @@ public class NaverRestaurantSearchService implements RestaurantSearchService {
 	}
 
 	private String buildQuery(RestaurantRequest request) {
-		return QUERY_FORMAT.formatted(request.location(), request.menu());
+		return QUERY_FORMAT.formatted(request.address(), request.menu());
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.recommendation.domain.menu.model.TimeSlot;
-import com.example.recommendation.domain.menu.model.dto.MenuRequest;
+import com.example.recommendation.domain.menu.model.dto.FindMenuRequest;
 import com.example.recommendation.domain.weather.model.SkyStatus;
 import com.example.recommendation.domain.weather.model.TemperatureStatus;
 import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallRequest;
@@ -31,7 +31,7 @@ class OpenAiChatClientTest {
 		for (int i = 0; i < 3; i++) {
 			executorService.submit(() -> {
 				long before = System.currentTimeMillis();
-				MenuRequest request = new MenuRequest(
+				FindMenuRequest request = new FindMenuRequest(
 					TemperatureStatus.COLD,
 					SkyStatus.RAINY,
 					TimeSlot.AFTERNOON

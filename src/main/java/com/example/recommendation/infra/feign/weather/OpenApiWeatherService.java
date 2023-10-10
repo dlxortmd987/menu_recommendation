@@ -7,15 +7,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.recommendation.domain.recommend.model.Coordinate;
 import com.example.recommendation.domain.weather.model.dto.WeatherResponse;
-import com.example.recommendation.domain.weather.service.WeatherFindService;
+import com.example.recommendation.domain.weather.service.WeatherService;
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
 import com.example.recommendation.infra.feign.weather.dto.WeatherGrid;
-import com.example.recommendation.infra.feign.weather.utils.WeatherGridConvertor;
+import com.example.recommendation.infra.feign.weather.utils.WeatherGridCsvConvertor;
 import com.example.recommendation.infra.feign.weather.utils.WeatherProperties;
 
 @Service
-public class OpenApiWeatherFindService implements WeatherFindService {
+public class OpenApiWeatherService implements WeatherService {
 
 	private static final int DEFAULT_NUM_OF_ROWS = 30;
 	private static final int DEFAULT_PAGE_NO = 1;
@@ -29,14 +30,14 @@ public class OpenApiWeatherFindService implements WeatherFindService {
 	private final WeatherClient weatherClient;
 	private final WeatherProperties weatherProperties;
 
-	public OpenApiWeatherFindService(WeatherClient weatherClient, WeatherProperties weatherProperties) {
+	public OpenApiWeatherService(WeatherClient weatherClient, WeatherProperties weatherProperties) {
 		this.weatherClient = weatherClient;
 		this.weatherProperties = weatherProperties;
 	}
 
 	@Override
-	public List<WeatherResponse> get(Double latitude, Double longitude, LocalDateTime targetTime) {
-		WeatherGrid weatherGrid = WeatherGridConvertor.get(latitude, longitude);
+	public List<WeatherResponse> search(Coordinate coordinate, LocalDateTime targetTime) {
+		WeatherGrid weatherGrid = WeatherGridCsvConvertor.convert(coordinate);
 
 		WeatherCallLiveResponse response = weatherClient.callLive(
 			DEFAULT_NUM_OF_ROWS,

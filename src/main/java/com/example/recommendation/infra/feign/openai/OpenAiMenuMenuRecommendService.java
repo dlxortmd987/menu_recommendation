@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.recommendation.domain.menu.MenuRecommendService;
+import com.example.recommendation.domain.menu.model.dto.FindMenuRequest;
 import com.example.recommendation.domain.menu.model.dto.MenuDetail;
-import com.example.recommendation.domain.menu.model.dto.MenuRequest;
 import com.example.recommendation.domain.menu.model.dto.MenuResponse;
 import com.example.recommendation.domain.weather.model.Weather;
 import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallRequest;
@@ -25,15 +25,15 @@ public class OpenAiMenuMenuRecommendService implements MenuRecommendService {
 	}
 
 	@Override
-	public MenuResponse recommend(MenuRequest menuRequest) {
-		OpenAiChatCallResponse openAiResponse = openAiChatClient.call(OpenAiChatCallRequest.from(menuRequest));
+	public MenuResponse recommend(FindMenuRequest findMenuRequest) {
+		OpenAiChatCallResponse openAiResponse = openAiChatClient.call(OpenAiChatCallRequest.from(findMenuRequest));
 
 		List<MenuDetail> menuDetails = parseContent(openAiResponse.getContent());
 
 		return new MenuResponse(
 			menuDetails,
-			new Weather(menuRequest.skyStatus(), menuRequest.temperature()),
-			menuRequest.timeSlot()
+			new Weather(findMenuRequest.skyStatus(), findMenuRequest.temperature()),
+			findMenuRequest.timeSlot()
 		);
 	}
 

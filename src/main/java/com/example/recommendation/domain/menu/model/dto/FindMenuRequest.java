@@ -7,14 +7,14 @@ import com.example.recommendation.domain.weather.model.SkyStatus;
 import com.example.recommendation.domain.weather.model.TemperatureStatus;
 import com.example.recommendation.domain.weather.model.dto.WeatherResponse;
 
-public record MenuRequest(
+public record FindMenuRequest(
 	TemperatureStatus temperature,
 	SkyStatus skyStatus,
 	TimeSlot timeSlot
 ) {
-	public static List<MenuRequest> from(List<WeatherResponse> weatherResponses) {
+	public static List<FindMenuRequest> from(List<WeatherResponse> weatherResponses) {
 		return weatherResponses.stream()
-			.map(weatherResponse -> new MenuRequest(
+			.map(weatherResponse -> new FindMenuRequest(
 				weatherResponse.weather().temperatureStatus(),
 				weatherResponse.weather().skyStatus(),
 				convert(weatherResponse.time())
