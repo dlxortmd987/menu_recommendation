@@ -36,4 +36,18 @@ public class RestaurantService {
 
 		return Collections.unmodifiableList(restaurantResponses);
 	}
+
+	public List<RestaurantResponse> search(Coordinate coordinate, MenuResponse menuResponse) {
+		String address = addressService.get(coordinate);
+
+		List<RestaurantRequest> restaurantRequests = RestaurantRequest.from(menuResponse, address);
+
+		List<RestaurantResponse> restaurantResponses = new ArrayList<>();
+
+		for (RestaurantRequest restaurantRequest : restaurantRequests) {
+			restaurantResponses.add(restaurantSearchService.search(restaurantRequest));
+		}
+
+		return Collections.unmodifiableList(restaurantResponses);
+	}
 }

@@ -30,7 +30,7 @@ public class NaverRestaurantSearchService implements RestaurantSearchService {
 		List<RestaurantResponseDetail> restaurantResponseDetails = naverSearchResponse.items()
 			.stream()
 			.map(item -> new RestaurantResponseDetail(
-				item.title(),
+				item.title().replaceAll("<[^>]*>", ""),
 				item.link(),
 				item.category(),
 				item.description(),

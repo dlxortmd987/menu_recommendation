@@ -5,15 +5,17 @@ public record Coordinate(
 	Double longitude
 ) {
 
+	private static final double EPSILON = 0.000001d;
+
 	public boolean isSame(Double latitude, Double longitude) {
 		return isSameLongitude(longitude) && isSameLatitude(latitude);
 	}
 
 	private boolean isSameLatitude(Double latitude) {
-		return this.latitude.compareTo(latitude) == 0;
+		return Math.abs(this.latitude - latitude) < EPSILON;
 	}
 
 	private boolean isSameLongitude(Double longitude) {
-		return this.longitude.compareTo(longitude) == 0;
+		return Math.abs(this.longitude - longitude) < EPSILON;
 	}
 }

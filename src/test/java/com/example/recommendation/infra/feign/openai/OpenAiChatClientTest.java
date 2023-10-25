@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.recommendation.domain.menu.model.TimeSlot;
+import com.example.recommendation.domain.menu.model.MealTime;
 import com.example.recommendation.domain.menu.model.dto.FindMenuRequest;
 import com.example.recommendation.domain.weather.model.SkyStatus;
 import com.example.recommendation.domain.weather.model.TemperatureStatus;
@@ -34,7 +34,7 @@ class OpenAiChatClientTest {
 				FindMenuRequest request = new FindMenuRequest(
 					TemperatureStatus.COLD,
 					SkyStatus.RAINY,
-					TimeSlot.AFTERNOON
+					MealTime.AFTERNOON
 				);
 
 				OpenAiChatCallResponse response = openAiChatClient.call(OpenAiChatCallRequest.from(request));

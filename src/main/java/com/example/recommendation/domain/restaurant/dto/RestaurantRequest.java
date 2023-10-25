@@ -18,4 +18,11 @@ public record RestaurantRequest(
 			.map(menu -> new RestaurantRequest(menu, address))
 			.toList();
 	}
+
+	public static List<RestaurantRequest> from(MenuResponse menuResponse, String address) {
+		return menuResponse.menus().stream()
+			.map(MenuDetail::menu)
+			.map(menu -> new RestaurantRequest(menu, address))
+			.toList();
+	}
 }

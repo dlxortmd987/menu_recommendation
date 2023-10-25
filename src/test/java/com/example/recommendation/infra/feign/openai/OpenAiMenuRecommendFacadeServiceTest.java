@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.example.recommendation.domain.menu.model.TimeSlot;
+import com.example.recommendation.domain.menu.model.MealTime;
 import com.example.recommendation.domain.menu.model.dto.FindMenuRequest;
 import com.example.recommendation.domain.menu.model.dto.MenuDetail;
 import com.example.recommendation.domain.menu.model.dto.MenuResponse;
@@ -27,7 +27,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(MockitoExtension.class)
-class OpenAiMenuRecommendServiceTest {
+class OpenAiMenuRecommendFacadeServiceTest {
 
 	@Mock
 	private OpenAiChatClient openAiChatClient;
@@ -43,7 +43,7 @@ class OpenAiMenuRecommendServiceTest {
 		FindMenuRequest findMenuRequest = new FindMenuRequest(
 			TemperatureStatus.COOL,
 			SkyStatus.CLEAR,
-			TimeSlot.EVENING
+			MealTime.EVENING
 		);
 		OpenAiChatCallResponse.forTest(content);
 		BDDMockito.when(openAiChatClient.call(any(OpenAiChatCallRequest.class)))
@@ -53,7 +53,7 @@ class OpenAiMenuRecommendServiceTest {
 			objectMapper.readValue(content, new TypeReference<List<MenuDetail>>() {
 			}),
 			new Weather(findMenuRequest.skyStatus(), findMenuRequest.temperature()),
-			findMenuRequest.timeSlot()
+			findMenuRequest.mealTime()
 		);
 
 		// when

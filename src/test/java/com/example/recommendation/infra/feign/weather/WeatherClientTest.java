@@ -1,15 +1,17 @@
 package com.example.recommendation.infra.feign.weather;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
 import com.example.recommendation.infra.feign.weather.utils.WeatherProperties;
 
-@SpringBootTest
+// @SpringBootTest
 class WeatherClientTest {
 
 	@Autowired
@@ -34,5 +36,11 @@ class WeatherClientTest {
 		);
 
 		System.out.println(weatherCallLiveResponse);
+	}
+
+	@Test
+	void test() {
+		LocalTime time = LocalTime.parse("1000", DateTimeFormatter.ofPattern("HHmm"));
+		System.out.println("time = " + time);
 	}
 }

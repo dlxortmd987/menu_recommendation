@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.recommendation.domain.recommend.model.Coordinate;
-import com.example.recommendation.domain.weather.model.dto.WeatherResponse;
+import com.example.recommendation.domain.weather.model.dto.WeatherResponseForTime;
 import com.example.recommendation.domain.weather.service.WeatherService;
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
 import com.example.recommendation.infra.feign.weather.dto.WeatherGrid;
@@ -36,7 +36,7 @@ public class OpenApiWeatherService implements WeatherService {
 	}
 
 	@Override
-	public List<WeatherResponse> search(Coordinate coordinate, LocalDateTime targetTime) {
+	public List<WeatherResponseForTime> search(Coordinate coordinate, LocalDateTime targetTime) {
 		WeatherGrid weatherGrid = WeatherGridCsvConvertor.convert(coordinate);
 
 		WeatherCallLiveResponse response = weatherClient.callLive(
