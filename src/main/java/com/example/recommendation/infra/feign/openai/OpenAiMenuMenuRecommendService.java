@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.recommendation.domain.menu.model.dto.MenuRequest;
-import com.example.recommendation.domain.recommend.MenuRecommendService;
-import com.example.recommendation.domain.recommend.dto.MenuDetail;
-import com.example.recommendation.domain.recommend.dto.MenuResponse;
+import com.example.recommendation.domain.menu.MenuRecommendService;
+import com.example.recommendation.domain.menu.model.dto.FindMenuRequest;
+import com.example.recommendation.domain.menu.model.dto.MenuDetail;
+import com.example.recommendation.domain.menu.model.dto.MenuResponse;
 import com.example.recommendation.domain.weather.model.Weather;
 import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallRequest;
 import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallResponse;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -25,22 +24,21 @@ public class OpenAiMenuMenuRecommendService implements MenuRecommendService {
 	}
 
 	@Override
-	public MenuResponse recommend(MenuRequest menuRequest) {
-		OpenAiChatCallResponse openAiResponse = openAiChatClient.call(OpenAiChatCallRequest.from(menuRequest));
+	public MenuResponse recommend(FindMenuRequest findMenuRequest) {
+		OpenAiChatCallResponse openAiResponse = openAiChatClient.call(OpenAiChatCallRequest.from(findMenuRequest));
 
-		List<MenuDetail> menuDetails = parseContent(openAiResponse.getContent());
+		MenuDetail menuDetails = parseContent(openAiResponse.getContent());
 
 		return new MenuResponse(
-			menuDetails,
-			new Weather(menuRequest.skyStatus(), menuRequest.temperature()),
-			menuRequest.timeSlot()
+			List.of(menuDetails),
+			new Weather(findMenuRequest.skyStatus(), findMenuRequest.temperature()),
+			findMenuRequest.mealTime()
 		);
 	}
 
-	private List<MenuDetail> parseContent(String content) {
+	private MenuDetail parseContent(String content) {
 		try {
-			return objectMapper.readValue(content, new TypeReference<List<MenuDetail>>() {
-			});
+			return objectMapper.readValue(content, MenuDetail.class);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -2,7 +2,7 @@ package com.example.recommendation.infra.feign.weather.dto;
 
 import java.util.List;
 
-import com.example.recommendation.domain.weather.model.dto.WeatherResponse;
+import com.example.recommendation.domain.weather.model.dto.WeatherResponseForTime;
 
 public record WeatherResponseBody(
 	WeatherResponseItems items,
@@ -11,11 +11,11 @@ public record WeatherResponseBody(
 	int totalCount
 ) {
 
-	public List<WeatherResponse> getWeatherList() {
+	public List<WeatherResponseForTime> getWeatherList() {
 		return items.item()
 			.stream()
 			.filter(WeatherResponseItems.Item::isWeatherCategory)
-			.map(item -> new WeatherResponse(item.fcstValue(), item.fcstTime()))
+			.map(item -> new WeatherResponseForTime(item.fcstValue(), item.fcstTime()))
 			.toList();
 	}
 }

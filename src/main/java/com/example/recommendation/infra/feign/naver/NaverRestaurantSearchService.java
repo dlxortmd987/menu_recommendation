@@ -30,7 +30,7 @@ public class NaverRestaurantSearchService implements RestaurantSearchService {
 		List<RestaurantResponseDetail> restaurantResponseDetails = naverSearchResponse.items()
 			.stream()
 			.map(item -> new RestaurantResponseDetail(
-				item.title(),
+				item.title().replaceAll("<[^>]*>", ""),
 				item.link(),
 				item.category(),
 				item.description(),
@@ -41,6 +41,6 @@ public class NaverRestaurantSearchService implements RestaurantSearchService {
 	}
 
 	private String buildQuery(RestaurantRequest request) {
-		return QUERY_FORMAT.formatted(request.location(), request.menu());
+		return QUERY_FORMAT.formatted(request.address(), request.menu());
 	}
 }
