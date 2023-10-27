@@ -2,10 +2,10 @@ package com.example.recommendation.presentation.dto;
 
 import java.time.LocalDateTime;
 
-import com.example.recommendation.domain.recommend.model.Coordinate;
+import com.example.recommendation.domain.recommend.model.GeographicCoordinate;
 
 public record RecommendRequest(
-	Coordinate coordinate,
+	GeographicCoordinate coordinate,
 	LocalDateTime targetTime
 ) {
 }

@@ -7,12 +7,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.recommendation.domain.recommend.model.Coordinate;
+import com.example.recommendation.domain.geometry.model.GpsCoordinate;
 import com.example.recommendation.domain.weather.model.dto.WeatherResponseForTime;
 import com.example.recommendation.domain.weather.service.WeatherService;
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
-import com.example.recommendation.infra.feign.weather.dto.WeatherGrid;
-import com.example.recommendation.infra.feign.weather.utils.WeatherGridCsvConvertor;
 import com.example.recommendation.infra.feign.weather.utils.WeatherProperties;
 
 @Service
@@ -36,16 +34,14 @@ public class OpenApiWeatherService implements WeatherService {
 	}
 
 	@Override
-	public List<WeatherResponseForTime> search(Coordinate coordinate, LocalDateTime targetTime) {
-		WeatherGrid weatherGrid = WeatherGridCsvConvertor.convert(coordinate);
-
+	public List<WeatherResponseForTime> search(GpsCoordinate gpsCoordinate, LocalDateTime targetTime) {
 		WeatherCallLiveResponse response = weatherClient.callLive(
 			DEFAULT_NUM_OF_ROWS,
 			DEFAULT_PAGE_NO,
 			targetTime.format(BASE_DATE_FORMAT),
 			fixBaseTime(targetTime.toLocalTime()),
-			weatherGrid.x(),
-			weatherGrid.y(),
+			gpsCoordinate.getIntegerX(),
+			gpsCoordinate.getIntegerY(),
 			weatherProperties
 		);
 
