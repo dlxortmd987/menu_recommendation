@@ -8,9 +8,14 @@ weather:
   data_type: JSON
 
 naver:
-  url: https://openapi.naver.com
-  client-id: ${NAVER_CLIENT_ID}
-  client-secret: ${NAVER_CLIENT_SECRET}
+  search:
+    url: https://openapi.naver.com
+    client-id: ${NAVER_SEARCH_CLIENT_ID}
+    client-secret: ${NAVER_SEARCH_CLIENT_SECRET}
+  address:
+    url: https://naveropenapi.apigw.ntruss.com/map-reversegeocode
+    client-id: ${NAVER_ADDRESS_CLIENT_ID}
+    client-secret: ${NAVER_ADDRESS_CLIENT_SECRET}
 
 spring:
   datasource:
