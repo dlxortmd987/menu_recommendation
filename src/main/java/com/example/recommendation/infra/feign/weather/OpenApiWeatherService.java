@@ -3,12 +3,11 @@ package com.example.recommendation.infra.feign.weather;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.recommendation.domain.geometry.model.GpsCoordinate;
-import com.example.recommendation.domain.weather.model.dto.WeatherResponseForTime;
+import com.example.recommendation.domain.menu.model.dto.MenuFindConditionRequest;
 import com.example.recommendation.domain.weather.service.WeatherService;
 import com.example.recommendation.infra.feign.weather.dto.WeatherCallLiveResponse;
 import com.example.recommendation.infra.feign.weather.utils.WeatherProperties;
@@ -20,7 +19,7 @@ public class OpenApiWeatherService implements WeatherService {
 	private static final int DEFAULT_PAGE_NO = 1;
 
 	private static final DateTimeFormatter BASE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
-	private static final String WEATHER_TIME_FORMAT = "hhmm";
+	private static final String WEATHER_TIME_FORMAT = "HHmm";
 
 	private static final int BASE_TIME_CRITERIA = 45;
 	private static final int BASE_TIME_FIX_NUMBER = 30;
@@ -34,7 +33,7 @@ public class OpenApiWeatherService implements WeatherService {
 	}
 
 	@Override
-	public List<WeatherResponseForTime> search(GpsCoordinate gpsCoordinate, LocalDateTime targetTime) {
+	public MenuFindConditionRequest searchMealTimeWeather(GpsCoordinate gpsCoordinate, LocalDateTime targetTime) {
 		WeatherCallLiveResponse response = weatherClient.callLive(
 			DEFAULT_NUM_OF_ROWS,
 			DEFAULT_PAGE_NO,
@@ -45,7 +44,7 @@ public class OpenApiWeatherService implements WeatherService {
 			weatherProperties
 		);
 
-		return response.getWeatherList();
+		return response.getMealTimeWeather();
 	}
 
 	private String fixBaseTime(LocalTime time) {

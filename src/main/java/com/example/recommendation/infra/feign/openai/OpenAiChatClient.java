@@ -10,7 +10,7 @@ import com.example.recommendation.infra.feign.openai.dto.OpenAiChatCallResponse;
 @FeignClient(name = "OpenAiChat", url = "${openai.chat-url}", configuration = OpenAiHeaderConfig.class)
 public interface OpenAiChatClient {
 
-	@PostMapping("/v1/chat/completions")
+	@PostMapping(value = "/v1/chat/completions", consumes = "application/json")
 	OpenAiChatCallResponse call(
 		@RequestBody OpenAiChatCallRequest request
 	);

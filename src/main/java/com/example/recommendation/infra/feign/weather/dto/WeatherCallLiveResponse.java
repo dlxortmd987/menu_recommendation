@@ -1,15 +1,13 @@
 package com.example.recommendation.infra.feign.weather.dto;
 
-import java.util.List;
-
-import com.example.recommendation.domain.weather.model.dto.WeatherResponseForTime;
+import com.example.recommendation.domain.menu.model.dto.MenuFindConditionRequest;
 
 public record WeatherCallLiveResponse(
 	WeatherResponseDto response
 ) {
 
-	public List<WeatherResponseForTime> getWeatherList() {
-		return response().body().getWeatherList();
+	public MenuFindConditionRequest getMealTimeWeather() {
+		return response().body().getMealTimeWeather();
 	}
 
 	public record WeatherResponseDto(

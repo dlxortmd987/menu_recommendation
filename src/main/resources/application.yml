@@ -32,6 +32,15 @@ spring:
         format_sql: true
   #    hibernate:
   #      ddl-auto: create
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 3000
+            read-timeout: 3000
+
+
 
 logging:
   level:

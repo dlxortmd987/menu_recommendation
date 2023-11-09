@@ -12,6 +12,7 @@ public class OpenAiHeaderConfig {
 		@Value("${openai.key}")
 		String key
 	) {
-		return requestTemplate -> requestTemplate.header("Authorization", key);
+		return requestTemplate -> requestTemplate
+			.header("Authorization", key);
 	}
 }
