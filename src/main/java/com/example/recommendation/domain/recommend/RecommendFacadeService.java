@@ -7,30 +7,33 @@ import org.springframework.stereotype.Service;
 
 import com.example.recommendation.domain.geometry.GeometryConvertService;
 import com.example.recommendation.domain.geometry.model.Geometry;
-import com.example.recommendation.domain.menu.MenuRecommendService;
-import com.example.recommendation.domain.menu.model.dto.FindMenuRequest;
+import com.example.recommendation.domain.menu.model.dto.MenuFindConditionRequest;
 import com.example.recommendation.domain.menu.model.dto.MenuResponse;
+import com.example.recommendation.domain.menu.service.MenuFindService;
 import com.example.recommendation.domain.recommend.model.GeographicCoordinate;
 import com.example.recommendation.domain.recommend.model.dto.RecommendResponse;
 import com.example.recommendation.domain.restaurant.RestaurantService;
 import com.example.recommendation.domain.restaurant.dto.RestaurantResponse;
-import com.example.recommendation.domain.weather.model.dto.WeatherResponseForTime;
 import com.example.recommendation.domain.weather.service.WeatherService;
 
 @Service
 public class RecommendFacadeService {
 
-	private static final int MENU_RECOMMEND_THREAD = 3;
+	private static final int FIND_NUMBER = 3;
 	private final GeometryConvertService geometryConvertService;
 	private final WeatherService weatherService;
-	private final MenuRecommendService menuRecommendService;
+	private final MenuFindService menuFindService;
 	private final RestaurantService restaurantService;
 
-	public RecommendFacadeService(GeometryConvertService geometryConvertService, WeatherService weatherService,
-		MenuRecommendService menuRecommendService, RestaurantService restaurantService) {
+	public RecommendFacadeService(
+		GeometryConvertService geometryConvertService,
+		WeatherService weatherService,
+		MenuFindService menuFindService,
+		RestaurantService restaurantService
+	) {
 		this.geometryConvertService = geometryConvertService;
 		this.weatherService = weatherService;
-		this.menuRecommendService = menuRecommendService;
+		this.menuFindService = menuFindService;
 		this.restaurantService = restaurantService;
 	}
 
@@ -39,14 +42,15 @@ public class RecommendFacadeService {
 		Geometry geometry = geometryConvertService.convert(geographicCoordinate);
 
 		// 위치로 날씨 받기
-		List<WeatherResponseForTime> weatherResponseForTimes = weatherService.search(
+		MenuFindConditionRequest menuCondition = weatherService.searchMealTimeWeather(
 			geometry.gpsCoordinate(),
 			targetTime
 		);
 
-		// 날씨와 시간으로 메뉴 추천
-		List<MenuResponse> menuResponses = menuRecommendService.recommend(
-			FindMenuRequest.from(weatherResponseForTimes));
+		List<MenuResponse> menuResponses = menuFindService.findAllByCondition(
+			menuCondition,
+			FIND_NUMBER
+		);
 
 		// 메뉴와 위치 기반으로 식당 추천
 		List<RestaurantResponse> restaurantResponses = restaurantService.search(
@@ -54,6 +58,6 @@ public class RecommendFacadeService {
 			menuResponses
 		);
 
-		return new RecommendResponse(menuResponses, restaurantResponses);
+		return new RecommendResponse(restaurantResponses);
 	}
 }

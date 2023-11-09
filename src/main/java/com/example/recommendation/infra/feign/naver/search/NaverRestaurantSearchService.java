@@ -23,10 +23,10 @@ public class NaverRestaurantSearchService implements RestaurantSearchService {
 	@Override
 	public RestaurantResponse search(RestaurantRequest request) {
 		NaverSearchResponse naverSearchResponse = naverSearchClient.call(buildQuery(request));
-		return convertResponse(naverSearchResponse);
+		return convertResponse(naverSearchResponse, request);
 	}
 
-	private RestaurantResponse convertResponse(NaverSearchResponse naverSearchResponse) {
+	private RestaurantResponse convertResponse(NaverSearchResponse naverSearchResponse, RestaurantRequest request) {
 		List<RestaurantResponseDetail> restaurantResponseDetails = naverSearchResponse.items()
 			.stream()
 			.map(item -> new RestaurantResponseDetail(
@@ -35,12 +35,14 @@ public class NaverRestaurantSearchService implements RestaurantSearchService {
 				item.category(),
 				item.description(),
 				item.telephone(),
-				item.address()))
+				item.address()
+			))
 			.toList();
-		return new RestaurantResponse(restaurantResponseDetails, naverSearchResponse.lastBuildDate());
+		return new RestaurantResponse(restaurantResponseDetails, request.menuDetail(),
+			naverSearchResponse.lastBuildDate());
 	}
 
 	private String buildQuery(RestaurantRequest request) {
-		return QUERY_FORMAT.formatted(request.address(), request.menu());
+		return QUERY_FORMAT.formatted(request.address(), request.menuDetail().name());
 	}
 }
